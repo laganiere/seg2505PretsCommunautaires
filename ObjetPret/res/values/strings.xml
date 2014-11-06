@@ -28,4 +28,13 @@
     <string name="button_confirmer_emprunt">Confirmer</string>
     <string name="button_confirmer_retour">Retourner</string>
 
+
+    <string name="action_settings">Settings</string>
+    <string name="name">Nom</string>
+    <string name="description">Description</string>
+    <string name="price">Taux journalier</string>
+    <string name="depot">Dépôt</string>
+    <string name="add">Ajouter</string>
+    <string name="cancel">Annuler</string>
+    
 </resources>
