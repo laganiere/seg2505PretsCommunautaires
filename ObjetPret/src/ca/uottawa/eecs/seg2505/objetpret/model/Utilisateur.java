@@ -13,6 +13,7 @@ public class Utilisateur {
 	private String ville = Constantes.VIDE;
 	private String codePostal = Constantes.VIDE;
 	private String pays = Constantes.VIDE;
+	private double coteUtilisateur = -1;
 	private Preteur preteur = null;
 
 	public Utilisateur() {
@@ -89,6 +90,14 @@ public class Utilisateur {
 
 	public void setPays(String pays) {
 		this.pays = pays;
+	}
+
+	public double getCoteUtilisateur() {
+		return coteUtilisateur;
+	}
+
+	public void setCoteUtilisateur(double coteUtilisateur) {
+		this.coteUtilisateur = coteUtilisateur;
 	}
 
 	public Preteur getPreteur() {
