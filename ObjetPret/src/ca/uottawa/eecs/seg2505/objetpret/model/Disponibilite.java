@@ -1,38 +1,37 @@
-package ca.uottawa.eecs.seg2505.objetpret;
+package ca.uottawa.eecs.seg2505.objetpret.model;
 
 import java.util.Date;
 
 
 public class Disponibilite {
 
+    public enum Statut{DISPONIBLE, ENDEMANDE, PRETER, NONDISPONIBLE}
+
     private Date date = null;
 
-    private String statut = "disponible";
+    private Statut statut = Statut.DISPONIBLE;
 
     private Objet objet = null;
     
-    public Disponibilite(Objet objet) {
+    public Disponibilite(Objet objet, Date date) {
         this.objet = objet;
+        this.date = date;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date newDate) {
-        date = newDate;
-    }
-
-    public String getStatut() {
+    public Statut getStatut() {
         return statut;
     }
 
-    public void setDate(String newStatut) {
+    public void setStatut(Statut newStatut) {
         statut = newStatut;
     }
 
-    public void setObjet(Objet newObjet) {
-        objetprett = newObjet;
+    public Objet getObjet() {
+        return objet;
     }
 
 }
