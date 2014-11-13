@@ -3,16 +3,17 @@ package ca.uottawa.eecs.seg2505.objetpret.model;
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
 public class Emprunt {
-
+	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
 	private String dateEmprunt = Constantes.VIDE;
 	// duree: nombre de jours
-	private int duree = -1;
-	private boolean confirmationEmprunt = false;
-
+	private int duree = 1;
+	private Statut statut=Statut.DEMANDE;
 	private Objet objet = null;
 	private Utilisateur utilisateur = null;
 	private Preteur preteur = null;
-
+	
+	
+	
 	public Emprunt() {
 	}
 
@@ -30,14 +31,6 @@ public class Emprunt {
 
 	public void setDuree(int duree) {
 		this.duree = duree;
-	}
-
-	public boolean isConfirmationEmprunt() {
-		return confirmationEmprunt;
-	}
-
-	public void setConfirmationEmprunt(boolean confirmationEmprunt) {
-		this.confirmationEmprunt = confirmationEmprunt;
 	}
 
 	public Objet getObjet() {
@@ -63,5 +56,34 @@ public class Emprunt {
 	public void setPreteur(Preteur preteur) {
 		this.preteur = preteur;
 	}
-
+	public void setStatutDemande(){
+		statut=Statut.DEMANDE;
+	}
+	public boolean isDemande(){
+		return statut.equals(Statut.DEMANDE);
+	}
+	public void setStatutAccepte(){
+		statut=Statut.ACCEPTE;
+	}
+	public boolean isAccepte(){
+		return statut.equals(Statut.ACCEPTE);
+	}
+	public void setStatutRefuse(){
+		statut=Statut.REFUSE;
+	}
+	public boolean isRefuse(){
+		return statut.equals(Statut.REFUSE);
+	}
+	public void setStatutConfirme(){
+		statut=Statut.CONFIRME;
+	}
+	public boolean isConfirme(){
+		return statut.equals(Statut.CONFIRME);
+	}
+	public void setStatutRetourne(){
+		statut=Statut.RETOURNE;
+	}
+	public boolean isRetourne(){
+		return statut.equals(Statut.RETOURNE);
+	}
 }

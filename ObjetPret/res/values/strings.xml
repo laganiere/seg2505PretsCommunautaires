@@ -27,5 +27,25 @@
     <string name="button_disponibilite_objet">Disponibilite</string>
     <string name="button_confirmer_emprunt">Confirmer</string>
     <string name="button_confirmer_retour">Retourner</string>
+    
+    <string name="label_nom">Nom</string>
+    <string name="label_description">Description</string>
+    <string name="label_debut_emprunt">Debut emprunt</string>
+    <string name="label_fin_emprunt">Fin emprunt</string>
+    <string name="button_valider_disponibilite">Valider disponibilite</string>
+    <string name="button_reserver">Reserver</string>
+    <string name="button_annuler">Annuler</string>
+    <string name="label_date_par_defaut">AAAA/MM/JJ</string>
+    <string name="message_date_de_debut_invalide">La date de debut ne dois pas depasser la date de fin.</string>
+    <string name="message_date_manquante">Vous devez choisir la date de debut et la date de fin.</string>
+    <string name="message_date_debut_passe">La date de debut doit etre dans le futur.</string>
+    <string name="message_objet_disponible">L\'objet est disponible pour les dates choisies.</string>
+    <string name="message_objet_non_disponible">L\'objet n\'est pas disponible pour les dates choisies.</string>
+
+        <string name="button_confirmer_emprunt">Confirmer</string>
+    <string name="button_confirmer_retour">Retourner</string>
+    <string name="button_select_all">Tout sÃ©lectionner </string>
+    <string name="ButtonRetour">Retour</string>
+    
 
 </resources>

@@ -4,6 +4,7 @@ import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
 
 public class Objet {
+	private String ID = Constantes.VIDE;
 	private String nom = Constantes.VIDE;
 	private String description = Constantes.VIDE;
 	private boolean disponible = false;
@@ -15,6 +16,14 @@ public class Objet {
 		this.preteur = preteur;
 	}
 
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	
 	public String getNom() {
 		return nom;
 	}

@@ -36,28 +36,32 @@
                 android:text="@string/button_ajouter_objet" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/button10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onDisponibilite"
-                android:text="@string/button_disponibilite_objet" />
-
+                android:onClick="onRechercher"
+                android:text="@string/button_rechercher_objet" />
+            
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onConfirmer"
-                android:text="@string/button_confirmer_emprunt" />
-
+                android:onClick="onDemander"
+                android:text="@string/button_demande_pret" />
+            
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/button9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onRetirer"
-                android:text="@string/button_retirer_objet" />
+                android:onClick="onRetourner"
+                android:text="@string/button_confirmer_retour" />
+            
+            
+            
+            
 
             <Button
                 android:id="@+id/button7"
@@ -75,14 +79,15 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/button10"
+                    <Button
+                android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onRechercher"
-                android:text="@string/button_rechercher_objet" />
-
+                android:onClick="onRetirer"
+                android:text="@string/button_retirer_objet" />
+            
+            
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
@@ -92,21 +97,14 @@
                 android:text="@string/button_choisir_objet" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onDemander"
-                android:text="@string/button_demande_pret" />
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRetourner"
-                android:text="@string/button_confirmer_retour" />
-
+                android:onClick="onConfirmer"
+                android:text="@string/button_confirmer_emprunt" />
+            
+            
             <Button
                 android:id="@+id/button11"
                 android:layout_width="match_parent"
@@ -114,7 +112,14 @@
                 android:layout_weight="1"
                 android:onClick="onEvaluer"
                 android:text="@string/button_evaluation" />
-
+<Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onDisponibilite"
+                android:text="@string/button_disponibilite_objet" />
+            
         </LinearLayout>
 
     </LinearLayout>
