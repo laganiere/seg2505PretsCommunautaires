@@ -6,7 +6,7 @@ public class Emprunt {
 	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
 	private String dateEmprunt = Constantes.VIDE;
 	// duree: nombre de jours
-	private int duree = -1;
+	private int duree = 1;
 	private Statut statut=Statut.DEMANDE;
 	private Objet objet = null;
 	private Utilisateur utilisateur = null;

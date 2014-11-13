@@ -19,9 +19,11 @@ import android.widget.DatePicker;
 import android.widget.Switch;
 import android.widget.TextView;
 
+
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 
 public class ChoisirObjetActivity extends ActionBarActivity {
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
