@@ -8,9 +8,10 @@ public class Emprunt {
 	// duree: nombre de jours
 	private int duree = 1;
 	private Statut statut=Statut.DEMANDE;
+	private boolean estEvalue = false;
 	private Objet objet = null;
 	private Utilisateur utilisateur = null;
-	private Preteur preteur = null;
+	private Utilisateur preteur = null;
 	
 	
 	
@@ -49,11 +50,11 @@ public class Emprunt {
 		this.utilisateur = utilisateur;
 	}
 
-	public Preteur getPreteur() {
+	public Utilisateur getPreteur() {
 		return preteur;
 	}
 
-	public void setPreteur(Preteur preteur) {
+	public void setPreteur(Utilisateur preteur) {
 		this.preteur = preteur;
 	}
 	public void setStatutDemande(){
@@ -85,5 +86,15 @@ public class Emprunt {
 	}
 	public boolean isRetourne(){
 		return statut.equals(Statut.RETOURNE);
+	}
+
+	// retourne si cet emprunt a recu une evaluation ou pas
+	// on permet une seule change pour l'evaluation pour le moment
+	public boolean estEvalue() {
+		return estEvalue;
+	}
+
+	public void setEvalue(boolean estEvalue) {
+		this.estEvalue = estEvalue;
 	}
 }
