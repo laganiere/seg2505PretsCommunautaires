@@ -42,6 +42,10 @@
     <string name="message_objet_disponible">L\'objet est disponible pour les dates choisies.</string>
     <string name="message_objet_non_disponible">L\'objet n\'est pas disponible pour les dates choisies.</string>
 
+        <string name="button_confirmer_emprunt">Confirmer</string>
+    <string name="button_confirmer_retour">Retourner</string>
+    <string name="button_select_all">Tout sÃ©lectionner </string>
+    <string name="ButtonRetour">Retour</string>
     
 
 </resources>
