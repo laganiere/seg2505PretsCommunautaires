@@ -1,3 +1,5 @@
+package ca.uottawa.eecs.seg2505.objetpret;
+
 import java.util.Date;
 import java.util.List;
 
