@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="ca.uottawa.eecs.seg2505.objetpret.model.Emprunt" project="ObjetPret" 
     file="/ObjetPret/src/ca/uottawa/eecs/seg2505/objetpret/model/Emprunt.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="431" y="-88"/>    
+    <position height="-1" width="-1" x="714" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="ca.uottawa.eecs.seg2505.objetpret.model.Objet" project="ObjetPret" 
     file="/ObjetPret/src/ca/uottawa/eecs/seg2505/objetpret/model/Objet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="785" y="67"/>    
+    <position height="-1" width="-1" x="429" y="-232"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -38,19 +38,19 @@
     </display>  
   </class>  
   <association id="5">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="6" name="objets"/>      
-      <multiplicity id="7" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="6" name="preteur"/>      
+      <multiplicity id="7" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="8">    
-    <end type="SOURCE" refId="3" navigable="false">      
+    <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="9" name="preteur"/>      
       <multiplicity id="10" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
@@ -62,25 +62,9 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="15" name="preteur"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="18" name="preteur"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="21" name="utilisateur"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
+      <attribute id="15" name="utilisateur"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
