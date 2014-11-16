@@ -46,18 +46,13 @@ public class LoginActivity extends ActionBarActivity {
 		String username = edUsername.getText().toString();
 		String password = edPassword.getText().toString();
 		
-		ParseUser.logInInBackground(username, password, new LogInCallback() {
-			
-			@Override
-			public void done(ParseUser arg0, ParseException arg1) {
-				if (arg1 != null) {
-					String message = getResources().getString(R.string.text_login_failed);
-					Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-				} else {
-					finish();
-				}
-			}
-		});
+		boolean loggedIn = Delegateur.getInstance().login(username, password);
+		if (!loggedIn) {
+			String message = getResources().getString(R.string.text_login_failed);
+			Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+		} else {
+			finish();
+		}
 	}
 	
 	public void onCancel(View view) {

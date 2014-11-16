@@ -49,4 +49,15 @@ public class UtilisateurControlleur {
 	public void addEvaluationPreteur(Utilisateur preteur, int rating) {
 		
 	}
+	
+	public boolean login(String username, String password) {
+		boolean result = false;
+		if (username != null 
+				&& !username.isEmpty()
+				&& password != null
+				&& !password.isEmpty()) {
+			result = dbFacade.login(username, password);
+		}
+		return result;
+	}
 }

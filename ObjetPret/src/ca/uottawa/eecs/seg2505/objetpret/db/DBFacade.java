@@ -84,4 +84,6 @@ public interface DBFacade {
 	public List<Emprunt> getObjetsPretes(Utilisateur utilisateur);
 	
 	public void confirmerRetour(Emprunt emprunt);
+	
+	public boolean login(String username, String password);
 }

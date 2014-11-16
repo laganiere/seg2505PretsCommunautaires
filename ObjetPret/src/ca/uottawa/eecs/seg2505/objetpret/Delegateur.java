@@ -180,4 +180,8 @@ public class Delegateur {
 	public void confirmerRetour(Emprunt emprunt) {
 		pretControlleur.confirmerRetour(emprunt);
 	}
+	
+	public boolean login(String username, String password) {
+		return utilisateurControlleur.login(username, password);
+	}
 }
