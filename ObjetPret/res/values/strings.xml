@@ -15,7 +15,6 @@
     <string name="title_activity_disponibilite_objet">Disponibilite d\'un objet</string>
     <string name="title_activity_confirmer_emprunt">Confirmer l\'emprunt</string>
     <string name="title_activity_confirmer_retour">Confirmer le retour</string>
-    
     <string name="button_inscription">Inscription</string>
     <string name="button_choisir_objet">Choisir</string>
     <string name="button_ajouter_objet">Ajouter</string>
@@ -27,7 +26,6 @@
     <string name="button_disponibilite_objet">Disponibilite</string>
     <string name="button_confirmer_emprunt">Confirmer</string>
     <string name="button_confirmer_retour">Retourner</string>
-    
     <string name="label_nom">Nom</string>
     <string name="label_description">Description</string>
     <string name="label_debut_emprunt">Debut emprunt</string>
@@ -41,11 +39,13 @@
     <string name="message_date_debut_passe">La date de debut doit etre dans le futur.</string>
     <string name="message_objet_disponible">L\'objet est disponible pour les dates choisies.</string>
     <string name="message_objet_non_disponible">L\'objet n\'est pas disponible pour les dates choisies.</string>
-
-        <string name="button_confirmer_emprunt">Confirmer</string>
-    <string name="button_confirmer_retour">Retourner</string>
     <string name="button_select_all">Tout sÃ©lectionner </string>
     <string name="ButtonRetour">Retour</string>
-    
+    <string name="button_login">Login</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="label_username">Username:</string>
+    <string name="label_password">Password:</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="text_login_failed">Le login n\'a pas reussi.</string>
 
 </resources>

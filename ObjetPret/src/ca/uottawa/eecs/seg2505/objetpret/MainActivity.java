@@ -88,4 +88,9 @@ public class MainActivity extends ActionBarActivity {
     	Intent intent = new Intent(this, EvaluationActivity.class);
     	startActivity(intent);
     }
+    
+    public void onLogin(View view) {
+    	Intent intent = new Intent(this, LoginActivity.class);
+    	startActivity(intent);
+    }
 }
