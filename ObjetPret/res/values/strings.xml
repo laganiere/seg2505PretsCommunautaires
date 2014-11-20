@@ -65,5 +65,11 @@
     <string name="inscrpcourriel">Courriel</string>
     <string name="inscrpmotdepasse">Mot de passe</string>
     <string name="inscrprepetmotdepasse">Confirmez le mot de passe</string>
+    
+    <string name = "title_recherche_par_mots_cles">Recherche par mots cles</string>
+    <string name = "label_voici_la_liste">Voici la liste d\'objets qui correspond a votre demande:</string>
+    <string name = "button_choisir">CHOISIR</string>
+    <string name="bouton_chercher">Chercher</string>
+    
 
 </resources>
