@@ -1,8 +1,15 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
+import java.io.Serializable;
+
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
-public class Emprunt {
+public class Emprunt implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4505206704962286678L;
+
 	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
 	private String dateEmprunt = Constantes.VIDE;
 	// duree: nombre de jours

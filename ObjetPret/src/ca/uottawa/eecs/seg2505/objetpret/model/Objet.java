@@ -1,9 +1,15 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
+import java.io.Serializable;
+
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
 
-public class Objet {
+public class Objet implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4074216449087272811L;
 	private String ID = Constantes.VIDE;
 	private String nom = Constantes.VIDE;
 	private String description = Constantes.VIDE;

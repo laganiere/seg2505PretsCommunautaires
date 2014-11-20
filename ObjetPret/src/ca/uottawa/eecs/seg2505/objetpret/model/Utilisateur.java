@@ -1,9 +1,15 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
+import java.io.Serializable;
+
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5890981082390755703L;
 	private String nomUtilisateur = Constantes.VIDE;
 	private String prenom = Constantes.VIDE;
 	private String nom = Constantes.VIDE;
