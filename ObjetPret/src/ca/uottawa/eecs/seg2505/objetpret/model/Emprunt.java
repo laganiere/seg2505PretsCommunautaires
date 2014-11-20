@@ -1,16 +1,25 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
+import java.io.Serializable;
+
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
-public class Emprunt {
+public class Emprunt implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4505206704962286678L;
+
 	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
+	public enum Evaluateur{AUCUN, PRETEUR, EMPRUNTEUR, TOUS}
 	private String dateEmprunt = Constantes.VIDE;
 	// duree: nombre de jours
-	private int duree = -1;
+	private int duree = 1;
 	private Statut statut=Statut.DEMANDE;
+	private Evaluateur eval = Evaluateur.AUCUN;
 	private Objet objet = null;
 	private Utilisateur utilisateur = null;
-	private Preteur preteur = null;
+	private Utilisateur preteur = null;
 	
 	
 	
@@ -49,11 +58,11 @@ public class Emprunt {
 		this.utilisateur = utilisateur;
 	}
 
-	public Preteur getPreteur() {
+	public Utilisateur getPreteur() {
 		return preteur;
 	}
 
-	public void setPreteur(Preteur preteur) {
+	public void setPreteur(Utilisateur preteur) {
 		this.preteur = preteur;
 	}
 	public void setStatutDemande(){
@@ -85,5 +94,49 @@ public class Emprunt {
 	}
 	public boolean isRetourne(){
 		return statut.equals(Statut.RETOURNE);
+	}
+
+	// retourne si cet emprunt a recu une evaluation ou pas
+	// on permet une seule change pour l'evaluation pour le moment
+	public boolean estEvalueParPreteur() {
+		return eval.equals(Evaluateur.PRETEUR) 
+				|| eval.equals(Evaluateur.TOUS);
+	}
+	
+	public boolean estEvalueParEMPRUNTEUR() {
+		return eval.equals(Evaluateur.EMPRUNTEUR) 
+				|| eval.equals(Evaluateur.TOUS);
+	}
+
+	public void setEvalueParPreteur(boolean estEvalue) {
+		if (estEvalue) {
+			if (eval.equals(Evaluateur.AUCUN)) {
+				eval = Evaluateur.PRETEUR;
+			} else if (eval.equals(Evaluateur.EMPRUNTEUR)) {
+				eval = Evaluateur.TOUS;
+			}
+		} else {
+			if (eval.equals(Evaluateur.PRETEUR)) {
+				eval = Evaluateur.AUCUN;
+			} else if (eval.equals(Evaluateur.TOUS)){
+				eval = Evaluateur.EMPRUNTEUR;
+			}
+		}
+	}
+	
+	public void setEvalueParEmprunteur(boolean estEvalue) {
+		if (estEvalue) {
+			if (eval.equals(Evaluateur.AUCUN)) {
+				eval = Evaluateur.EMPRUNTEUR;
+			} else if (eval.equals(Evaluateur.PRETEUR)) {
+				eval = Evaluateur.TOUS;
+			}
+		} else {
+			if (eval.equals(Evaluateur.EMPRUNTEUR)) {
+				eval = Evaluateur.AUCUN;
+			} else if (eval.equals(Evaluateur.TOUS)){
+				eval = Evaluateur.PRETEUR;
+			}
+		}
 	}
 }

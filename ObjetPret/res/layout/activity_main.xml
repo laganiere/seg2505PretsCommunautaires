@@ -9,13 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.uottawa.eecs.seg2505.objetpret.MainActivity" >
 
-    <Button
-        android:id="@+id/buttonInscription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onInscription"
-        android:text="@string/button_inscription" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
@@ -26,6 +19,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/buttonInscription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onInscription"
+                android:text="@string/button_inscription" />
 
             <Button
                 android:id="@+id/button2"
@@ -78,6 +79,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onLogin"
+                android:text="@string/button_login" />
 
                     <Button
                 android:id="@+id/button6"

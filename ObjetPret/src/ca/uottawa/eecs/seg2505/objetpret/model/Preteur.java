@@ -1,10 +1,14 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
-import java.util.*;
+import java.io.Serializable;
 
-public class Preteur {
+
+public class Preteur implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7924534199264453436L;
 	private double cote = -1;
-	private List<Objet> objets = new ArrayList<Objet>();
 
 	public Preteur() {
 	}
@@ -15,18 +19,6 @@ public class Preteur {
 
 	public void setCote(double cote) {
 		this.cote = cote;
-	}
-
-	public List<Objet> getObjets() {
-		return objets;
-	}
-	
-	public void addObjet(Objet obj) {
-		objets.add(obj);
-	}
-	
-	public void removeObjet(Objet obj) {
-		objets.remove(obj);
 	}
 
 }

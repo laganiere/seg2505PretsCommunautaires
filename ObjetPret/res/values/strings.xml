@@ -15,7 +15,6 @@
     <string name="title_activity_disponibilite_objet">Disponibilite d\'un objet</string>
     <string name="title_activity_confirmer_emprunt">Confirmer l\'emprunt</string>
     <string name="title_activity_confirmer_retour">Confirmer le retour</string>
-    
     <string name="button_inscription">Inscription</string>
     <string name="button_choisir_objet">Choisir</string>
     <string name="button_ajouter_objet">Ajouter</string>
@@ -27,7 +26,6 @@
     <string name="button_disponibilite_objet">Disponibilite</string>
     <string name="button_confirmer_emprunt">Confirmer</string>
     <string name="button_confirmer_retour">Retourner</string>
-    
     <string name="label_nom">Nom</string>
     <string name="label_description">Description</string>
     <string name="label_debut_emprunt">Debut emprunt</string>
@@ -41,7 +39,31 @@
     <string name="message_date_debut_passe">La date de debut doit etre dans le futur.</string>
     <string name="message_objet_disponible">L\'objet est disponible pour les dates choisies.</string>
     <string name="message_objet_non_disponible">L\'objet n\'est pas disponible pour les dates choisies.</string>
-
-    
+    <string name="button_select_all">Tout sÃ©lectionner </string>
+    <string name="ButtonRetour">Retour</string>
+    <string name="button_login">Login</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="label_username">Username:</string>
+    <string name="label_password">Password:</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="text_login_failed">Le login n\'a pas reussi.</string>
+	
+	<string name="inscription_nom">Nom</string>
+    <string name="incription_courriel">Courriel</string>
+    <string name="inscription_motdepasse">Entrez un mot de passe</string>
+    <string name="inscription_retapermotdepasse">Retapez le mot de passe</string>
+    <string name="inscription_dixhuitplus">Je confirme avoir plus de 18 ans</string>
+    <string name="inscription_sinscrire">S\'inscrire</string>
+    <string name="inscription_annuler">Annuler</string>
+    <string name="inscription_informations">Entrez les informations suivantes</string>
+    <string name="inscription_inscription">Inscription</string>
+    <string name="inscriptionnomutilisateur">Nomd\'utilisateur</string>
+    <string name="inscriptionnomutil">Nom d\'utilisateur</string>
+    <string name="inscriptionnomu">Nom d\'utilisateur</string>
+    <string name="inscnomutilisateur">Nom d\'utilisateur</string>
+    <string name="inscrpnom">Nom</string>
+    <string name="inscrpcourriel">Courriel</string>
+    <string name="inscrpmotdepasse">Mot de passe</string>
+    <string name="inscrprepetmotdepasse">Confirmez le mot de passe</string>
 
 </resources>
