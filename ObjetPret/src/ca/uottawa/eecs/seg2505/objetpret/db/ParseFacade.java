@@ -4,11 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
-import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt.Statut;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class ParseFacade implements DBFacade {
@@ -140,6 +141,43 @@ public class ParseFacade implements DBFacade {
 			result = false;
 		}
 		return result;
+	}
+	
+	public static ParseUser getParseUser(String nomUtilisateur) {
+		ParseUser user = ParseUser.getCurrentUser();
+		
+		if (user != null) {
+			if (user.getUsername().equals(nomUtilisateur)) {
+				return user;
+			}
+		}
+		
+		ParseQuery<ParseUser> query = ParseUser.getQuery();
+		query.whereEqualTo("username", nomUtilisateur);
+		
+		try {
+			List<ParseUser> list = query.find();
+			if (list.size() > 0) {
+				user = list.get(0);
+			}
+		} catch (ParseException e) {
+			user = null;
+		}
+		
+		return user;
+	}
+	
+	public static ParseObject getParseObjetParID(String objetID) {
+		ParseObject objet = null;
+		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseObjectAdapter.objetClassName);
+		
+		try {
+			objet = query.get(objetID);
+		} catch (ParseException e) {
+			objet = null;
+		}
+		
+		return objet;
 	}
 
 }

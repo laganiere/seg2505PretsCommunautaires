@@ -107,9 +107,22 @@ public class Utilisateur implements Serializable {
 	}
 
 	public Preteur getPreteur() {
-		return preteur;
+		return this.preteur;
+	}
+	
+	public boolean isPreteur() {
+		return (this.preteur != null);
 	}
 
+	public void setPreteur(boolean estPreteur) {
+		if (estPreteur
+				&& this.preteur == null) {
+			this.preteur = new Preteur();
+		} else if (!estPreteur) {
+			this.preteur = null;
+		}
+	}
+	
 	public void setPreteur(Preteur preteur) {
 		this.preteur = preteur;
 	}

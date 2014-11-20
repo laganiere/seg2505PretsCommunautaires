@@ -1,6 +1,7 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
@@ -12,7 +13,7 @@ public class Emprunt implements Serializable{
 
 	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
 	public enum Evaluateur{AUCUN, PRETEUR, EMPRUNTEUR, TOUS}
-	private String dateEmprunt = Constantes.VIDE;
+	private Date dateEmprunt = null;
 	// duree: nombre de jours
 	private int duree = 1;
 	private Statut statut=Statut.DEMANDE;
@@ -34,11 +35,11 @@ public class Emprunt implements Serializable{
 		this.ID = ID;
 	}
 
-	public String getDateEmprunt() {
+	public Date getDateEmprunt() {
 		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(String dateEmprunt) {
+	public void setDateEmprunt(Date dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
@@ -103,6 +104,10 @@ public class Emprunt implements Serializable{
 	public boolean isRetourne(){
 		return statut.equals(Statut.RETOURNE);
 	}
+	
+	public Statut getStatus() {
+		return statut;
+	}
 
 	// retourne si cet emprunt a recu une evaluation ou pas
 	// on permet une seule change pour l'evaluation pour le moment
@@ -148,3 +153,4 @@ public class Emprunt implements Serializable{
 		}
 	}
 }
+
