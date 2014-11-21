@@ -130,17 +130,17 @@ public class ParseFacade implements DBFacade {
 	}
 
 	@Override
-	public boolean login(String username, String password) {
-		boolean result = true;
+	public Utilisateur login(String username, String password) {
+		Utilisateur utilisateur = null;
 		try {
 			ParseUser user = ParseUser.logIn(username, password);
-			if (user == null) {
-				result = false;
+			if (user != null) {
+				utilisateur = ParseObjectAdapter.toUtilisateur(user);
 			}
 		} catch (ParseException e) {
-			result = false;
+			utilisateur = null;
 		}
-		return result;
+		return utilisateur;
 	}
 	
 	public static ParseUser getParseUser(String nomUtilisateur) {

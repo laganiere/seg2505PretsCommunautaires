@@ -60,7 +60,10 @@ public class UtilisateurControlleur {
 				&& !username.isEmpty()
 				&& password != null
 				&& !password.isEmpty()) {
-			result = dbFacade.login(username, password);
+			utilisateurCourant = dbFacade.login(username, password);
+			if (utilisateurCourant != null) {
+				result = true;
+			}
 		}
 		return result;
 	}
