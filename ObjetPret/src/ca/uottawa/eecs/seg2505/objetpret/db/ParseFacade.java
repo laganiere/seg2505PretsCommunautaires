@@ -179,5 +179,13 @@ public class ParseFacade implements DBFacade {
 		
 		return objet;
 	}
+	
+	public Utilisateur getUtilisateurCourant() {
+		ParseUser user = ParseUser.getCurrentUser();
+		if (user != null) {
+			return ParseObjectAdapter.toUtilisateur(user);
+		}
+		return null;
+	}
 
 }

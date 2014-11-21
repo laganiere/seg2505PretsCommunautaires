@@ -86,4 +86,6 @@ public interface DBFacade {
 	public void confirmerRetour(Emprunt emprunt);
 	
 	public boolean login(String username, String password);
+	
+	public Utilisateur getUtilisateurCourant();
 }
