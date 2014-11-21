@@ -137,8 +137,8 @@ public class Delegateur {
 		return objetControlleur.retirerObjet(objet);
 	}
 	
-	public boolean changerDisponibilitePeriode(Objet objet, Date date, Emprunt.Statut statut) {
-		return objetControlleur.changerDisponibilitePeriode(objet, date, statut);
+	public boolean changerDisponibilitePeriode(Objet objet, Date date, boolean estDisponible) {
+		return objetControlleur.changerDisponibilitePeriode(objet, date, estDisponible);
 	}
 	
 	public boolean estDisponible(Objet objet, Date date) {

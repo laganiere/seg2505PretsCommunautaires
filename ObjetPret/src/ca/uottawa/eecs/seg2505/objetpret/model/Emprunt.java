@@ -1,6 +1,7 @@
 package ca.uottawa.eecs.seg2505.objetpret.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 
@@ -11,25 +12,34 @@ public class Emprunt implements Serializable{
 	private static final long serialVersionUID = 4505206704962286678L;
 
 	public enum Statut{DEMANDE, ACCEPTE, REFUSE, CONFIRME, RETOURNE}
-	private String dateEmprunt = Constantes.VIDE;
+	public enum Evaluateur{AUCUN, PRETEUR, EMPRUNTEUR, TOUS}
+	private Date dateEmprunt = null;
 	// duree: nombre de jours
 	private int duree = 1;
 	private Statut statut=Statut.DEMANDE;
-	private boolean estEvalue = false;
+	private Evaluateur eval = Evaluateur.AUCUN;
 	private Objet objet = null;
 	private Utilisateur utilisateur = null;
 	private Utilisateur preteur = null;
-	
+	private String ID = Constantes.VIDE;
 	
 	
 	public Emprunt() {
 	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
+	}
 
-	public String getDateEmprunt() {
+	public Date getDateEmprunt() {
 		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(String dateEmprunt) {
+	public void setDateEmprunt(Date dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
@@ -94,14 +104,53 @@ public class Emprunt implements Serializable{
 	public boolean isRetourne(){
 		return statut.equals(Statut.RETOURNE);
 	}
+	
+	public Statut getStatus() {
+		return statut;
+	}
 
 	// retourne si cet emprunt a recu une evaluation ou pas
 	// on permet une seule change pour l'evaluation pour le moment
-	public boolean estEvalue() {
-		return estEvalue;
+	public boolean estEvalueParPreteur() {
+		return eval.equals(Evaluateur.PRETEUR) 
+				|| eval.equals(Evaluateur.TOUS);
+	}
+	
+	public boolean estEvalueParEMPRUNTEUR() {
+		return eval.equals(Evaluateur.EMPRUNTEUR) 
+				|| eval.equals(Evaluateur.TOUS);
 	}
 
-	public void setEvalue(boolean estEvalue) {
-		this.estEvalue = estEvalue;
+	public void setEvalueParPreteur(boolean estEvalue) {
+		if (estEvalue) {
+			if (eval.equals(Evaluateur.AUCUN)) {
+				eval = Evaluateur.PRETEUR;
+			} else if (eval.equals(Evaluateur.EMPRUNTEUR)) {
+				eval = Evaluateur.TOUS;
+			}
+		} else {
+			if (eval.equals(Evaluateur.PRETEUR)) {
+				eval = Evaluateur.AUCUN;
+			} else if (eval.equals(Evaluateur.TOUS)){
+				eval = Evaluateur.EMPRUNTEUR;
+			}
+		}
+	}
+	
+	public void setEvalueParEmprunteur(boolean estEvalue) {
+		if (estEvalue) {
+			if (eval.equals(Evaluateur.AUCUN)) {
+				eval = Evaluateur.EMPRUNTEUR;
+			} else if (eval.equals(Evaluateur.PRETEUR)) {
+				eval = Evaluateur.TOUS;
+			}
+		} else {
+			if (eval.equals(Evaluateur.EMPRUNTEUR)) {
+				eval = Evaluateur.AUCUN;
+			} else if (eval.equals(Evaluateur.TOUS)){
+				eval = Evaluateur.PRETEUR;
+			}
+		}
 	}
 }
+

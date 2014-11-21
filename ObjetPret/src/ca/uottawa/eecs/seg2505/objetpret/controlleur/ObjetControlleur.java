@@ -31,7 +31,7 @@ public class ObjetControlleur {
 	}
 
 	public boolean changerDisponibilitePeriode(Objet objet, Date date,
-			Statut statut) {
+			boolean estDisponible) {
 		// TODO Auto-generated method stub
 		return false;
 	}

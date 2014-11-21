@@ -59,7 +59,7 @@ public interface DBFacade {
 	
 	public boolean retirerObjet(Objet objet);
 	
-	public boolean changerDisponibilitePeriode(Objet objet, Date date, Emprunt.Statut statut);
+	public boolean changerDisponibilitePeriode(Objet objet, Date date, boolean estDisponible);
 	
 	public boolean estDisponible(Objet objet, Date date);
 
@@ -85,5 +85,7 @@ public interface DBFacade {
 	
 	public void confirmerRetour(Emprunt emprunt);
 	
-	public boolean login(String username, String password);
+	public Utilisateur login(String username, String password);
+	
+	public Utilisateur getUtilisateurCourant();
 }
