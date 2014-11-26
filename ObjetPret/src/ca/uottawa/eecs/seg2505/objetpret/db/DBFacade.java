@@ -59,7 +59,7 @@ public interface DBFacade {
 	
 	public boolean retirerObjet(Objet objet);
 	
-	public boolean changerDisponibilitePeriode(Objet objet, Date date, boolean estDisponible);
+	public boolean changerDisponibilitePeriode(Objet objet, Date date, Emprunt.Statut statut);
 	
 	public boolean estDisponible(Objet objet, Date date);
 
@@ -75,7 +75,7 @@ public interface DBFacade {
 	 * @param demande - l'Emprunt represantant la demande de pret a traiter 
 	 * @param accepte - <code>true</code> si la demande est acceptee, <code>false</code> si elle est refusee
 	 **/
-	public void setAccepte(Emprunt demande, boolean accepte);
+	public void sauvegarderEmprunt(Emprunt demande);
 	
 	public void ajouterEmprunt(Emprunt emprunt);
 	
@@ -85,7 +85,5 @@ public interface DBFacade {
 	
 	public void confirmerRetour(Emprunt emprunt);
 	
-	public Utilisateur login(String username, String password);
-	
-	public Utilisateur getUtilisateurCourant();
+	public boolean login(String username, String password);
 }

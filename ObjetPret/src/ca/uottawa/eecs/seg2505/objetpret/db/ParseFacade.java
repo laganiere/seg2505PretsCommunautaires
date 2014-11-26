@@ -4,12 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
+import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt.Statut;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class ParseFacade implements DBFacade {
@@ -82,7 +81,7 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public boolean changerDisponibilitePeriode(Objet objet, Date date,
-			boolean estDisponible) {
+			Statut statut) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -100,7 +99,7 @@ public class ParseFacade implements DBFacade {
 	}
 
 	@Override
-	public void setAccepte(Emprunt demande, boolean accepte) {
+	public void sauvegarderEmprunt(Emprunt demande) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -130,62 +129,17 @@ public class ParseFacade implements DBFacade {
 	}
 
 	@Override
-	public Utilisateur login(String username, String password) {
-		Utilisateur utilisateur = null;
+	public boolean login(String username, String password) {
+		boolean result = true;
 		try {
 			ParseUser user = ParseUser.logIn(username, password);
-			if (user != null) {
-				utilisateur = ParseObjectAdapter.toUtilisateur(user);
+			if (user == null) {
+				result = false;
 			}
 		} catch (ParseException e) {
-			utilisateur = null;
+			result = false;
 		}
-		return utilisateur;
-	}
-	
-	public static ParseUser getParseUser(String nomUtilisateur) {
-		ParseUser user = ParseUser.getCurrentUser();
-		
-		if (user != null) {
-			if (user.getUsername().equals(nomUtilisateur)) {
-				return user;
-			}
-		}
-		
-		ParseQuery<ParseUser> query = ParseUser.getQuery();
-		query.whereEqualTo("username", nomUtilisateur);
-		
-		try {
-			List<ParseUser> list = query.find();
-			if (list.size() > 0) {
-				user = list.get(0);
-			}
-		} catch (ParseException e) {
-			user = null;
-		}
-		
-		return user;
-	}
-	
-	public static ParseObject getParseObjetParID(String objetID) {
-		ParseObject objet = null;
-		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseObjectAdapter.objetClassName);
-		
-		try {
-			objet = query.get(objetID);
-		} catch (ParseException e) {
-			objet = null;
-		}
-		
-		return objet;
-	}
-	
-	public Utilisateur getUtilisateurCourant() {
-		ParseUser user = ParseUser.getCurrentUser();
-		if (user != null) {
-			return ParseObjectAdapter.toUtilisateur(user);
-		}
-		return null;
+		return result;
 	}
 
 }
