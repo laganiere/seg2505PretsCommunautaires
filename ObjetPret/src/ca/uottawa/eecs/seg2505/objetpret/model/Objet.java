@@ -22,6 +22,9 @@ public class Objet implements Serializable {
 		this.preteur = preteur;
 	}
 
+	public Objet() {
+	}
+
 	public String getID() {
 		return ID;
 	}
@@ -77,5 +80,4 @@ public class Objet implements Serializable {
 	public void setPreteur(Utilisateur preteur) {
 		this.preteur = preteur;
 	}
-
 }

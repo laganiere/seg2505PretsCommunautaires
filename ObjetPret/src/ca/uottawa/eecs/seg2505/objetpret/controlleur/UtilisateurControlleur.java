@@ -9,13 +9,17 @@ import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 public class UtilisateurControlleur {
 
 	protected DBFacade dbFacade = null;
+	protected Utilisateur utilisateurCourant = null;
 
 	public UtilisateurControlleur(DBFacade dbFacade) {
 		this.dbFacade = dbFacade;
 	}
 
 	public Utilisateur getUtilisateurCourant() {
-		return null;
+		if (utilisateurCourant == null) {
+			utilisateurCourant = dbFacade.getUtilisateurCourant();
+		}
+		return utilisateurCourant;
 	}
 
 	public boolean sauvegarderUtilisateur(Utilisateur user) {
@@ -56,7 +60,10 @@ public class UtilisateurControlleur {
 				&& !username.isEmpty()
 				&& password != null
 				&& !password.isEmpty()) {
-			result = dbFacade.login(username, password);
+			utilisateurCourant = dbFacade.login(username, password);
+			if (utilisateurCourant != null) {
+				result = true;
+			}
 		}
 		return result;
 	}
