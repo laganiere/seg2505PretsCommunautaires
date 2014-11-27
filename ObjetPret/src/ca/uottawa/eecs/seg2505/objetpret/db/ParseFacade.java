@@ -1,5 +1,6 @@
 package ca.uottawa.eecs.seg2505.objetpret.db;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
@@ -89,8 +90,21 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public List<Emprunt> getDemandesDePret(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Utilisateur");
+		query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
+		query.whereEqualTo("empruntStatut", "DEMANDE");
+		List<ParseObject> resultats;
+		List<Emprunt> emprunts = new ArrayList<Emprunt>();
+		try {
+			resultats = query.find();
+			for(ParseObject res: resultats){
+				emprunts.add(ParseObjectAdapter.toEmprunt(res));
+				return emprunts;
+			}
+		} catch (Exception e){
+		  		System.out.println(e);
+		}
+		return null;// TODO Auto-generated method stub
 	}
 
 	@Override
