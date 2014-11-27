@@ -1,9 +1,5 @@
 package ca.uottawa.eecs.seg2505.objetpret;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -11,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import ca.uottawa.eecs.seg2505.objetpret.db.ParseFacade;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -46,6 +43,7 @@ public class LoginActivity extends ActionBarActivity {
 		String username = edUsername.getText().toString();
 		String password = edPassword.getText().toString();
 		
+		Delegateur.setDBFacade(new ParseFacade());
 		boolean loggedIn = Delegateur.getInstance().login(username, password);
 		if (!loggedIn) {
 			String message = getResources().getString(R.string.text_login_failed);
