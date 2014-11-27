@@ -179,7 +179,7 @@ public class ParseObjectAdapter {
 	 */
 	public static Utilisateur toUtilisateur(ParseUser user) {
 		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setNom(user.getUsername());
+		utilisateur.setNomUtilisateur(user.getUsername());
 		utilisateur.setAdresse(user.getString(utilisateurAdresse));
 		utilisateur.setCodePostal(user.getString(utilisateurCodePostal));
 		utilisateur.setCoteUtilisateur(user.getDouble(utilisateurCodePostal));
