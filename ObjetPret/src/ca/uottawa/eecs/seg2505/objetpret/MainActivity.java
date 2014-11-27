@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -71,6 +72,7 @@ public class MainActivity extends ActionBarActivity {
     
     public void onChoisir(View view) {
     	Intent intent = new Intent(this, ChoisirObjetActivity.class);
+    	intent.putExtra("test", new Emprunt());
     	startActivity(intent);
     }
     
