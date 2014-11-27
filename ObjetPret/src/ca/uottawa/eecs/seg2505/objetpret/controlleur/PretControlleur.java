@@ -2,6 +2,7 @@ package ca.uottawa.eecs.seg2505.objetpret.controlleur;
 
 import java.util.List;
 
+import ca.uottawa.eecs.seg2505.objetpret.Delegateur;
 import ca.uottawa.eecs.seg2505.objetpret.db.DBFacade;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
@@ -15,11 +16,17 @@ public class PretControlleur {
 	}
 
 	public List<Emprunt> getDemandesDePret() {
-		return null;
+		return dbFacade.getDemandesDePret(Delegateur.getInstance().getUtilisateurCourant());
 	}
 
 	public void setAccepte(Emprunt demande, boolean accepte) {
-		
+		if(accepte){
+			demande.setStatutAccepte();
+		}
+		else{
+			demande.setStatutRefuse();
+		}
+		dbFacade.sauvegarderEmprunt(demande);
 	}
 	
 	public void ajouterEmprunt(Emprunt emprunt) {

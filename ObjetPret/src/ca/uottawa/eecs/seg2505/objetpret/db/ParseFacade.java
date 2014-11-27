@@ -1,19 +1,17 @@
 package ca.uottawa.eecs.seg2505.objetpret.db;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
-
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class ParseFacade implements DBFacade {
-
 	@Override
 	public boolean sauvegarderUtilisateur(Utilisateur user) {
 		// TODO Auto-generated method stub
@@ -35,7 +33,6 @@ public class ParseFacade implements DBFacade {
 	@Override
 	public void ajouterObjet(Objet objet) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -53,13 +50,11 @@ public class ParseFacade implements DBFacade {
 	@Override
 	public void addEvaluation(Utilisateur utilisateur, int rating) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void addEvaluationPreteur(Utilisateur preteur, int rating) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -95,22 +90,33 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public List<Emprunt> getDemandesDePret(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setAccepte(Emprunt demande, boolean accepte) {
-		// TODO Auto-generated method stub
-		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Utilisateur");
+		query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
+		query.whereEqualTo("empruntStatut", "DEMANDE");
+		List<ParseObject> resultats;
+		List<Emprunt> emprunts = new ArrayList<Emprunt>();
+		try {
+			resultats = query.find();
+			for(ParseObject res: resultats){
+				emprunts.add(ParseObjectAdapter.toEmprunt(res));
+				return emprunts;
+			}
+		} catch (Exception e){
+		  		System.out.println(e);
+		}
+		return null;// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void ajouterEmprunt(Emprunt emprunt) {
 		// TODO Auto-generated method stub
-		
 	}
-
+	@Override
+	public void sauvegarderEmprunt(Emprunt emprunt){
+		ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
+		//TODO enregistrer sur parse
+		empruntParse.saveEventually();
+	}
 	@Override
 	public List<Emprunt> getObjetsEmpruntes(Utilisateur utilisateur) {
 		// TODO Auto-generated method stub
@@ -126,7 +132,6 @@ public class ParseFacade implements DBFacade {
 	@Override
 	public void confirmerRetour(Emprunt emprunt) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -142,19 +147,16 @@ public class ParseFacade implements DBFacade {
 		}
 		return utilisateur;
 	}
-	
+
 	public static ParseUser getParseUser(String nomUtilisateur) {
 		ParseUser user = ParseUser.getCurrentUser();
-		
 		if (user != null) {
 			if (user.getUsername().equals(nomUtilisateur)) {
 				return user;
 			}
 		}
-		
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.whereEqualTo("username", nomUtilisateur);
-		
 		try {
 			List<ParseUser> list = query.find();
 			if (list.size() > 0) {
@@ -163,23 +165,21 @@ public class ParseFacade implements DBFacade {
 		} catch (ParseException e) {
 			user = null;
 		}
-		
 		return user;
 	}
-	
+
 	public static ParseObject getParseObjetParID(String objetID) {
 		ParseObject objet = null;
-		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseObjectAdapter.objetClassName);
-		
+		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+				ParseObjectAdapter.objetClassName);
 		try {
 			objet = query.get(objetID);
 		} catch (ParseException e) {
 			objet = null;
 		}
-		
 		return objet;
 	}
-	
+
 	public Utilisateur getUtilisateurCourant() {
 		ParseUser user = ParseUser.getCurrentUser();
 		if (user != null) {
