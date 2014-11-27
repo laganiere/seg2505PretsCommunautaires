@@ -3,9 +3,13 @@ package ca.uottawa.eecs.seg2505.objetpret.controlleur;
 import java.util.Date;
 import java.util.List;
 
+import ca.uottawa.eecs.seg2505.objetpret.Delegateur;
 import ca.uottawa.eecs.seg2505.objetpret.db.DBFacade;
+import ca.uottawa.eecs.seg2505.objetpret.db.ParseFacade;
+import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt.Statut;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
+import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 
 public class ObjetControlleur {
 
@@ -37,8 +41,7 @@ public class ObjetControlleur {
 	}
 
 	public boolean estDisponible(Objet objet, Date date) {
-		// TODO Auto-generated method stub
-		return false;
+		return dbFacade.estDisponible(objet, date);
 	}
 	
 }

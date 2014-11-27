@@ -23,7 +23,7 @@ public class PretControlleur {
 	}
 	
 	public void ajouterEmprunt(Emprunt emprunt) {
-		
+		dbFacade.ajouterEmprunt(emprunt);
 	}
 	
 	public List<Emprunt> getObjetsEmpruntes(Utilisateur utilisateur) {
