@@ -10,20 +10,22 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.Switch;
 import android.widget.TextView;
 
-
+import ca.uottawa.eecs.seg2505.objetpret.db.ParseFacade;
+import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 
 public class ChoisirObjetActivity extends ActionBarActivity {
 	
+	private Objet obj = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,15 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Initialise l'interface
+	 */
 	private void init() {
+		
+		if (Delegateur.getInstance() == null) {
+			Delegateur.setDBFacade(new ParseFacade());
+		} //if
+		
 		Objet obj = getObjet();
 		
 		TextView nom = (TextView) findViewById(R.id.textViewNom);
@@ -65,6 +75,11 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 		disbonibilite.setText("");
 	}
 	
+	/**
+	 * Permet de choisir la date de début de l'emprunt
+	 * est lancée lorsqu'on clique sur le champ de date début
+	 * @param view
+	 */
 	public void onClickDebut(View view) {
 		
 		TextView dateDebutView = (TextView) findViewById(R.id.textViewDateDebut);
@@ -116,6 +131,11 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 		datePicker.show();
 	}
 	
+	/**
+	 * Permet de choisir la date de fin de l'emprunt
+	 * est lancée lorsqu'on clique sur le champ de date de fin
+	 * @param view
+	 */
 	public void onClickFin(View view) {
 		
 		TextView dateFinView = (TextView) findViewById(R.id.textViewDateFin);
@@ -167,7 +187,117 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 		datePicker.show();
 	}
 	
+	/**
+	 * lancée lorsqu'on appui sur le bouton valider disponibilité
+	 * @param view
+	 */
 	public void onValiderDisponibilite(View view) {
+		estDisponible(view);
+	}
+	
+	/**
+	 * lancée lorsqu'on appui sur le bouton annulée
+	 * @param view
+	 */
+	public void onCancel(View view) {
+		finish();
+	}
+	
+	/**
+	 * Effectue la réservation si l'objet est disponible
+	 * lancée lorsqu'on appui sur le bouton valider réserver
+	 * @param view
+	 */
+	public void onReserver(View view){
+		
+		Objet objet=getObjet();
+		
+		boolean disponible = estDisponible(view);
+		
+		if (disponible) {
+		
+			Delegateur del = Delegateur.getInstance();
+			
+			TextView dateFinView = (TextView) findViewById(R.id.textViewDateFin);
+			String dateFinString = (String) dateFinView.getText();
+	        
+	        TextView dateDebutView = (TextView) findViewById(R.id.textViewDateDebut);
+			String dateDebutString = (String) dateDebutView.getText();
+			
+			Date dateFin = getDateFromString(dateFinString);
+			Date dateDebut = getDateFromString(dateDebutString);
+			
+			// number of days between DateFin and DateDebut
+			Calendar calendarDebut = Calendar.getInstance();
+		    Calendar calendarFin = Calendar.getInstance();
+		    calendarDebut.setTime(dateDebut);
+		    calendarFin.setTime(dateFin);
+		    long diff = calendarFin.getTimeInMillis() - calendarDebut.getTimeInMillis();
+		    
+		    int duree = (int) diff / (24 * 60 * 60 * 1000); 
+		    
+			
+			Emprunt emprunt = new Emprunt();
+			emprunt.setDateEmprunt(dateDebut);
+			emprunt.setDuree(duree);
+			emprunt.setObjet(objet);
+			emprunt.setEvalueParEmprunteur(false);
+			emprunt.setEvalueParPreteur(false);
+			emprunt.setUtilisateur(del.getUtilisateurCourant());
+			emprunt.setPreteur(objet.getPreteur());
+			emprunt.setStatutDemande();		
+			
+			del.ajouterEmprunt(emprunt);
+			
+			finish();	
+			
+		} //if
+	
+	}
+	
+	/**
+	 * Extrait l'objet passé en paramètre, 
+	 * si l'objet n'est pas passé on créer une instance vide
+	 * 
+	 * @return instance de l'objet
+	 */
+	private Objet getObjet() {
+		
+		if (this.obj == null) {
+			
+			// try and get objet passed as parameter
+			Intent intent = getIntent();
+			Objet obj = (Objet) intent.getSerializableExtra("objet");
+			
+			// if still null create a mock object
+			if (obj == null) { // create empty object
+			
+				Delegateur del = Delegateur.getInstance();
+				obj = new Objet();
+				
+				obj.setPreteur(del.getUtilisateurCourant());
+				obj.setNom("");
+				obj.setDescription("");	        
+				
+			} //if
+			
+			this.obj = obj;
+		} //if
+		
+		return this.obj;	
+	}
+	
+	/**
+	 * Valide que les dates choisi sont valides et affiche le statut 
+	 * @param view
+	 * @return true si est disponible et false sinon
+	 */
+	private boolean estDisponible(View view) {
+		
+		Objet objet=getObjet();
+		
+		boolean resultat = false;
+	
 		TextView dateFinView = (TextView) findViewById(R.id.textViewDateFin);
 		String dateFinString = (String) dateFinView.getText();
 		
@@ -199,10 +329,12 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 				status = getString(R.string.message_date_de_debut_invalide);
 				disponibilite.setTextColor(Color.RED);
 			} else {
-				Boolean available = Math.random() > 0.5 ? true : false;
+				Delegateur del = Delegateur.getInstance();
+				Boolean available = del.estDisponible(objet, dateDebut);
 				if (available) {
 					status = getString(R.string.message_objet_disponible);
 					disponibilite.setTextColor(Color.BLUE);
+					resultat = true;
 				} else {
 					status = getString(R.string.message_objet_non_disponible);
 					disponibilite.setTextColor(Color.RED);
@@ -212,21 +344,15 @@ public class ChoisirObjetActivity extends ActionBarActivity {
 		} //if
 	
 		disponibilite.setText(status);
+		
+		return resultat;
 	}
 	
-	private Objet getObjet() {
-		Objet obj = new Objet(null);
-		obj.setNom("Une Pelle");
-		obj.setDescription(
-		        "la jolie pelle que mon arrière grand mère m'a légué\n"+
-		        "Il faudrait faire attention de ne pas l'abimé\n"+
-		        "NOTEZ que c'est une pelle de qualité supérieure là.\n"+
-		        "Bon et si on mettais une super longue linge de texte qu'est qui arriverait?  Est qu'il va y avoir un scroll horizontal?\n"+
-		        "Plus \n et plus \n et plus\n de texte"
-		);
-		return obj;	
-	}
-	
+	/**
+	 * Transforme un string yyyy/MM/dd en objet Date
+	 * @param view
+	 * @return l'objet date
+	 */
 	private Date getDateFromString(String value) {
 		Date result = new Date();
 		if (value.length() > 0) {
