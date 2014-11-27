@@ -50,7 +50,7 @@ public class DemandeAdapter extends ArrayAdapter<Emprunt> {
 		
 		objetView.setText(demandePret.get(position).getObjet().getNom());
 		emprunteurView.setText(demandePret.get(position).getUtilisateur().getPrenom()+" "+demandePret.get(position).getUtilisateur().getNom());
-		dateView.setText(demandePret.get(position).getDateEmprunt());
+		dateView.setText(demandePret.get(position).getDateEmprunt().toString().substring(0, 11));
 		coteBar.setRating((float)demandePret.get(position).getUtilisateur().getCoteUtilisateur());
 		coteBar.setEnabled(false);
 		return rowView;

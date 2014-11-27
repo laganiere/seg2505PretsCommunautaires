@@ -59,7 +59,7 @@ public class DemandePretActivity extends Activity {
 			    	 RatingBar cote = (RatingBar) findViewById(R.id.cote);
 			    	 objet.setText(demande.getObjet().getNom());
 			    	 emprunteur.setText(demande.getUtilisateur().getPrenom()+" "+demande.getUtilisateur().getNom());
-			    	 date.setText(demande.getDateEmprunt());
+			    	 date.setText(demande.getDateEmprunt().toString().substring(0, 11));
 			    	 description.setText(demande.getObjet().getDescription());
 			    	 duree.setText(demande.getDuree() + " jour(s)");
 			    	 cote.setRating((float)demande.getPreteur().getCoteUtilisateur());
