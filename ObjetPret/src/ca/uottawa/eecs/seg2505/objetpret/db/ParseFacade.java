@@ -99,7 +99,9 @@ public class ParseFacade implements DBFacade {
 	}
 	@Override
 	public void sauvegarderEmprunt(Emprunt emprunt){
-		//TODO
+		ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
+		//TODO enregistrer sur parse
+		empruntParse.saveEventually();
 	}
 	@Override
 	public List<Emprunt> getObjetsEmpruntes(Utilisateur utilisateur) {

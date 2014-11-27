@@ -22,7 +22,6 @@ public class PretControlleur {
 	public void setAccepte(Emprunt demande, boolean accepte) {
 		if(accepte){
 			demande.setStatutAccepte();
-			//TODO marquer les objets non disponibles pour les dates (ici ou dans demande.setStatutAccepte)
 		}
 		else{
 			demande.setStatutRefuse();
