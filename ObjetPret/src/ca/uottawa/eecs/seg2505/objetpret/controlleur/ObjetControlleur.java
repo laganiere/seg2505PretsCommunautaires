@@ -45,8 +45,7 @@ public class ObjetControlleur {
 	}
 
 	public boolean estDisponible(Objet objet, Date date) {
-		// TODO Auto-generated method stub
-		return false;
+		return dbFacade.estDisponible(objet, date);
 	}
 	
 }

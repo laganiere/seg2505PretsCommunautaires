@@ -86,5 +86,7 @@
     <string name="refuser">Refuser</string>
     <string name="pas_reponse">Pas de Réponse</string>
     
+    <string name="message_doit_etre_connecte">Vous devez être connecté pour effectué cette opération</string>
+    
 	
 </resources>

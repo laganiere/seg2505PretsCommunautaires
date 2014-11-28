@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.util.Log;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
@@ -87,8 +88,23 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public boolean estDisponible(Objet objet, Date date) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Emprunt");
+    		
+    		query.whereEqualTo("empruntObjet", objet.getID());
+    		query.whereEqualTo("empruntDateEmprunt", date);
+    		
+    		List<ParseObject> results = query.find();
+    		
+    		if (results.isEmpty()) {
+    			return true;
+    		} else {
+    			return false;
+    		} //if
+		} catch (ParseException e) {
+			Log.e(ParseObjectAdapter.erreurTag, "Impossible de valider la disponibilité");
+			return false;
+		} // try
 	}
 
 	@Override
@@ -112,8 +128,15 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public void ajouterEmprunt(Emprunt emprunt) {
-		// TODO Auto-generated method stub
+		ParseObject obj = ParseObjectAdapter.from(emprunt);
+		
+		try {
+			obj.save();
+		} catch (ParseException e) {
+			Log.e(ParseObjectAdapter.erreurTag, "Impossible de sauvegarder l'emprunt.");
+		}
 	}
+	
 	@Override
 	public void sauvegarderEmprunt(Emprunt emprunt){
 		ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
