@@ -1,5 +1,6 @@
 package ca.uottawa.eecs.seg2505.objetpret;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.adapters.DemandeAdapter;
@@ -21,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DemandePretActivity extends Activity {
-	List<Emprunt> listeDeDemande;
+	List<Emprunt> listeDeDemande=new ArrayList();
 	DemandeAdapter aAdpt;
 	Context context;
 	int pos;

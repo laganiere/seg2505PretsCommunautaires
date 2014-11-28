@@ -109,21 +109,22 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public List<Emprunt> getDemandesDePret(Utilisateur utilisateur) {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Utilisateur");
-		query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
-		query.whereEqualTo("empruntStatut", "DEMANDE");
-		List<ParseObject> resultats;
-		List<Emprunt> emprunts = new ArrayList<Emprunt>();
 		try {
+			ParseQuery<ParseObject> query = ParseQuery.getQuery("Emprunt");
+			query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
+			query.whereEqualTo("empruntStatut", "DEMANDE");
+			List<ParseObject> resultats;
+			List<Emprunt> emprunts = new ArrayList<Emprunt>();
 			resultats = query.find();
+			System.out.println(resultats.size());
 			for(ParseObject res: resultats){
 				emprunts.add(ParseObjectAdapter.toEmprunt(res));
 				return emprunts;
 			}
-		} catch (Exception e){
+		}catch (Exception e){
 		  		System.out.println(e);
 		}
-		return null;// TODO Auto-generated method stub
+		return new ArrayList<Emprunt>();// TODO Auto-generated method stub
 	}
 
 	@Override
