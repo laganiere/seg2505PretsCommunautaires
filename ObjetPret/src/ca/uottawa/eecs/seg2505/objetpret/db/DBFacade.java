@@ -90,4 +90,8 @@ public interface DBFacade {
 	public Utilisateur login(String username, String password);
 
 	public Utilisateur getUtilisateurCourant();
+	
+	public List<Objet> listeObjetUtilisateur(Utilisateur utilisateur);
+	
+	public boolean retirerObjet(List<Objet> objet);
 }

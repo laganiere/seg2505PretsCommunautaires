@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.objetpret.db.DBFacade;
-import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt.Statut;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
+import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 
 public class ObjetControlleur {
 
@@ -29,6 +29,14 @@ public class ObjetControlleur {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public boolean retirerObjet(List<Objet> objet) {return dbFacade.retirerObjet(objet);	}
+
+
+	public List<Objet> listeObjetUtilisateur(Utilisateur utilisateur) {
+		return dbFacade.listeObjetUtilisateur(utilisateur);
+	}
+
 
 	public boolean changerDisponibilitePeriode(Objet objet, Date date,
 			boolean estDisponible) {

@@ -1,5 +1,6 @@
 package ca.uottawa.eecs.seg2505.objetpret;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
@@ -24,7 +25,7 @@ public class ListViewAdapter<T> extends ArrayAdapter<T> {
 		mSelectedItemsIds = new SparseBooleanArray();
 		this.context = context;
 		this.list = objet;
-		dummyPosition = list.indexOf("");
+		dummyPosition = list.size()-1;
 	}
 
 	public View getView(int position, View view, ViewGroup parent) {
@@ -44,6 +45,9 @@ public class ListViewAdapter<T> extends ArrayAdapter<T> {
 
 		return textView;
 
+	}
+	public void setList(List<Objet> list){
+		this.list = list;
 	}
 
 	public void remove(Objet object) {
@@ -101,6 +105,12 @@ public class ListViewAdapter<T> extends ArrayAdapter<T> {
 
 	public String getName(int position) {
 		return list.get(position).getNom();
+	}
+
+	public List<Objet> getListObjet(int position) {
+		List<Objet> tempList = new LinkedList<Objet>();
+		tempList.add(list.get(position));
+		return tempList;
 	}
 
 }

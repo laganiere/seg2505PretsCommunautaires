@@ -1,9 +1,11 @@
 package ca.uottawa.eecs.seg2505.objetpret;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
+import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -22,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class RetirerObjetActivity extends ActionBarActivity {
 	ListView listView;
@@ -29,9 +32,10 @@ public class RetirerObjetActivity extends ActionBarActivity {
 	ListViewAdapter<View> adapter;
 	int p = -1;
 	Button button;
+	Delegateur delegateur;
 	ActionMode actionMode;
 
-	@Override
+		@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_retirer_objet);
@@ -39,9 +43,16 @@ public class RetirerObjetActivity extends ActionBarActivity {
 		listView = (ListView) findViewById(R.id.listViewRetirer);
 		button = (Button) findViewById(R.id.buttonSelectAll);
 		button.setBackgroundColor(Color.TRANSPARENT);
-
-		initList();
-
+		delegateur = Delegateur.getInstance();
+		Utilisateur utilisateur = delegateur.getUtilisateurCourant();
+		if (utilisateur != null) {
+			list = delegateur.listeObjetUtilisateur(utilisateur);
+			list.add(new Objet());
+		}else{
+			Toast toast = new Toast(this);
+			toast.setText("ABOARD");
+			return;
+		}
 		// adapteur qui servira a mettre l'information dans le listView
 		adapter = new ListViewAdapter<View>(this,
 				android.R.layout.simple_list_item_1, list);
@@ -111,20 +122,19 @@ public class RetirerObjetActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parentAdapter, View view,
 					int position, long id) {
-				dialog(adapter.getContext(), position,
-						adapter.getName(position),
+				dialog(adapter.getContext(), position, adapter
+						.getName(position),
 						list.get(position).getDescription(), false);
 
 			}
 
 		});
 	}
-	
-	public void onRetour(View view){
-		Intent intent = new Intent(this, MainActivity.class);
-    	startActivity(intent);
-	}
 
+	public void onRetour(View view) {
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+	}
 
 	private void dialog(Context context, final int position, String title,
 			String message, final boolean action) {
@@ -139,7 +149,14 @@ public class RetirerObjetActivity extends ActionBarActivity {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						if (action) {
-							adapter.remove(adapter.getObjet(position));
+							if (delegateur.retirerObjet(adapter
+									.getListObjet(position)))
+								adapter.remove(adapter.getObjet(position));
+							else {
+								Toast toast = new Toast(adapter.getContext());
+								toast.setText("L'objet n'a pas pu être retiré du système.");
+								toast.show();
+							}
 						} else {
 							dialog(adapter.getContext(),
 									position,
@@ -173,17 +190,22 @@ public class RetirerObjetActivity extends ActionBarActivity {
 		builder.setPositiveButton("Supprimer",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-
+						LinkedList<Objet> tempList = new LinkedList<Objet>();
 						// Captures all selected ids with a loop
 						for (int i = (selected.size() - 1); i >= 0; i--) {
 							if (selected.valueAt(i)) {
-								Objet selecteditem = adapter.getObjet(selected
-										.keyAt(i));
+								tempList.add(adapter.getObjet(selected.keyAt(i)));
 								// Remove selected items following the ids
-								adapter.remove(selecteditem);
+
 							}
 
 						}
+						delegateur.retirerObjet(tempList);
+						list = delegateur.listeObjetUtilisateur(delegateur
+								.getUtilisateurCourant());
+						list.add(new Objet());
+						adapter.setList(list);
+						adapter.notifyDataSetChanged();
 					}
 				});
 		builder.setNegativeButton("Annuler",
@@ -196,33 +218,6 @@ public class RetirerObjetActivity extends ActionBarActivity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 
-	}
-
-	private void initList() {
-		list.add(addObjet("Scie", "Sert à couper du bois"));
-		list.add(addObjet("Marteau", "Sert à planter des clous"));
-		list.add(addObjet("Tondeuse à gazon", "Sert à couper du gazon"));
-		list.add(addObjet("Pelle", "Sert à creuser des trous"));
-		list.add(addObjet("Tournevis", "Sert à visser des vis"));
-		list.add(addObjet("Voiture", "Pertmet de te déplacer du point A au point B"));
-		list.add(
-				addObjet("Remorque",
-				"S'atache après une voiture, permet de transporter des objet trop gros pour entrer dans la voiture"));
-		list.add(addObjet("Souffleur à feuille",
-				"Crée du vent artificiel, pour souffler des objets"));
-		list.add(addObjet("tente", "Sert d'abris pour dormir à l'extérieur"));
-		list.add(addObjet("Béquille",
-				"Aide à marcher lorsque nous avons une jambe cassée"));
-		list.add(addObjet("Perceuse", "Sert à faire des trous"));
-		list.add(addObjet("", ""));
-
-	}
-
-	private Objet addObjet(String nom, String description) {
-		Objet objet = new Objet(null);
-		objet.setNom(nom);
-		objet.setDescription(description);
-		return objet;
 	}
 
 	@Override

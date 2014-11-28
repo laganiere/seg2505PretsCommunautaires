@@ -2,10 +2,13 @@ package ca.uottawa.eecs.seg2505.objetpret.db;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Utilisateur;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -187,5 +190,44 @@ public class ParseFacade implements DBFacade {
 		}
 		return null;
 	}
+	
+	public boolean retirerObjet(List<Objet> objet) {
+		List<ParseObject> parseObject = new LinkedList<ParseObject>();
+		for (int i = 0; i < objet.size(); i++) {
+			parseObject.add(getParseObjetParID(objet.get(i).getID()));
+
+		}
+		try {
+			ParseObject.deleteAll(parseObject);
+		} catch (ParseException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public List<Objet> listeObjetUtilisateur(Utilisateur utilisateur) {
+		
+		List<ParseObject> parse;
+		List<Objet> objet = new LinkedList<Objet>();
+		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+				ParseObjectAdapter.objetClassName);
+
+		query.whereEqualTo(ParseObjectAdapter.objetPreteur,
+				utilisateur.getNomUtilisateur());
+
+		try {
+			parse = query.find();
+			if (parse.size() > 0) {
+				for (int i = 0; i < parse.size(); i++) {
+					objet.add(ParseObjectAdapter.toObjet(parse.get(i)));
+				}
+			}
+		} catch (ParseException e) {
+			return null;
+		}
+
+		return objet;
+	}
+
 
 }

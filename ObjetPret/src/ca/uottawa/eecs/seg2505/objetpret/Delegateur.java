@@ -137,6 +137,14 @@ public class Delegateur {
 		return objetControlleur.retirerObjet(objet);
 	}
 	
+	public boolean retirerObjet(List<Objet> objet) {
+		return objetControlleur.retirerObjet(objet);
+	}
+	public List<Objet> listeObjetUtilisateur(Utilisateur utilisateur){
+		return objetControlleur.listeObjetUtilisateur(utilisateur);
+	}
+
+	
 	public boolean changerDisponibilitePeriode(Objet objet, Date date, boolean estDisponible) {
 		return objetControlleur.changerDisponibilitePeriode(objet, date, estDisponible);
 	}
