@@ -1,9 +1,20 @@
 package ca.uottawa.eecs.seg2505.objetpret;
 
-import android.support.v7.app.ActionBarActivity;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 
 public class RechercherObjetActivity extends ActionBarActivity {
 
