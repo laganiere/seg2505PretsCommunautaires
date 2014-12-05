@@ -69,8 +69,27 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public List<Objet> rechercherObjets(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		// query
+		ParseQuery<ParseObject> query = new ParseQuery("Objet");
+		query.whereStartsWith("objetNom", keyword);
+		
+		// results
+		List<ParseObject> resultsParse = null;
+		try {
+			resultsParse = query.find();
+		}
+		catch(ParseException e) {
+			// ???
+		}
+		
+		// to List<Objet>
+		List<Objet> resultsList = new ArrayList<Objet>();
+		if(resultsParse != null)
+			for(ParseObject obj : resultsParse)
+				resultsList.add(ParseObjectAdapter.toObjet(obj));
+		
+		// bye bye
+		return resultsList;
 	}
 
 	@Override

@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editTextObjet"
+        android:id="@+id/searchInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
@@ -31,11 +31,11 @@
     </EditText>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="onRechercherListe"
+        android:onClick="onClick_searchButton"
         android:text="@string/bouton_chercher" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/searchResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
@@ -65,20 +65,22 @@
             tools:ignore="UselessParent" >
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/selectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:text="@string/button_annuler" />
+                android:onClick="onClick_selectButton"
+                android:text="@string/button_choisir_objet" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/cancelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:text="@string/button_choisir" />
+                android:onClick="onClick_cancelButton"
+                android:text="@string/button_annuler" />
 
         </LinearLayout>
 

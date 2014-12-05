@@ -1,5 +1,6 @@
 package ca.uottawa.eecs.seg2505.objetpret.controlleur;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class ObjetControlleur {
 	}
 
 	public List<Objet> rechercherObjets(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		if(keyword.isEmpty()) return new ArrayList<Objet>();
+		else return dbFacade.rechercherObjets(keyword);
 	}
 
 	public boolean retirerObjet(Objet objet) {
