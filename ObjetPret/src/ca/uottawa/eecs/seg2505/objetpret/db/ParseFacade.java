@@ -135,13 +135,12 @@ public class ParseFacade implements DBFacade {
 			List<ParseObject> resultats;
 			List<Emprunt> emprunts = new ArrayList<Emprunt>();
 			resultats = query.find();
-			System.out.println(resultats.size());
 			for(ParseObject res: resultats){
 				emprunts.add(ParseObjectAdapter.toEmprunt(res));
 				return emprunts;
 			}
 		}catch (Exception e){
-		  		System.out.println(e);
+			Log.e(ParseObjectAdapter.erreurTag, "erreur de Parse (Parsefacade.sauvegarderEmprunt)");
 		}
 		return new ArrayList<Emprunt>();// TODO Auto-generated method stub
 	}
@@ -160,23 +159,6 @@ public class ParseFacade implements DBFacade {
 	@Override
 	public void sauvegarderEmprunt(Emprunt emprunt){
 		try{
-			//NOTE: il faut peut-etre supprimer l'ancien objet sur parse. 
-			//si c'est le cas, décommenter les lignes suivantes
-			/*
-			//trouver l'objet parse original
-			ParseQuery<ParseObject> query = ParseQuery.getQuery("Emprunt");
-			query.whereEqualTo("empruntPreteur", emprunt.getPreteur().getNomUtilisateur());
-			query.whereEqualTo(ParseObjectAdapter.empruntUtilisateur, emprunt.getUtilisateur().getNom());
-			List<ParseObject> results = query.find();
-			ParseObject original;
-			for(ParseObject o : results){
-				if(o.getObjectId().equals(emprunt.getID())){
-					original=o;
-					break;
-				}
-			}
-			original.delete();
-			*/
 			ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
 			Log.d("ID de l'Objet", emprunt.getID()+" parse: "+empruntParse.getObjectId());
 			//enregistrer sur parse

@@ -2,8 +2,6 @@ package ca.uottawa.eecs.seg2505.adapters;
 
 import java.util.List;
 
-import ca.uottawa.eecs.seg2505.objetpret.R.id;
-import ca.uottawa.eecs.seg2505.objetpret.R.layout;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.R;
 
@@ -49,7 +47,7 @@ public class DemandeAdapter extends ArrayAdapter<Emprunt> {
 		RatingBar coteBar = (RatingBar) rowView.findViewById(R.id.cote);
 		
 		objetView.setText(demandePret.get(position).getObjet().getNom());
-		emprunteurView.setText(demandePret.get(position).getUtilisateur().getPrenom()+" "+demandePret.get(position).getUtilisateur().getNom());
+		emprunteurView.setText(demandePret.get(position).getUtilisateur().getNomUtilisateur());
 		dateView.setText(demandePret.get(position).getDateEmprunt().toString().substring(0, 11));
 		coteBar.setRating((float)demandePret.get(position).getUtilisateur().getCoteUtilisateur());
 		coteBar.setEnabled(false);

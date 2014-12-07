@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uottawa.eecs.seg2505.adapters.DemandeAdapter;
-import ca.uottawa.eecs.seg2505.objetpret.controlleur.PretControlleur;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 
 import android.app.Activity;
@@ -22,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DemandePretActivity extends Activity {
-	List<Emprunt> listeDeDemande=new ArrayList();
+	List<Emprunt> listeDeDemande=new ArrayList<Emprunt>();
 	DemandeAdapter aAdpt;
 	Context context;
 	int pos;
@@ -59,7 +58,7 @@ public class DemandePretActivity extends Activity {
 			    	 TextView duree = (TextView) findViewById(R.id.duree);
 			    	 RatingBar cote = (RatingBar) findViewById(R.id.cote);
 			    	 objet.setText(demande.getObjet().getNom());
-			    	 emprunteur.setText(demande.getUtilisateur().getPrenom()+" "+demande.getUtilisateur().getNom());
+			    	 emprunteur.setText(demande.getUtilisateur().getNomUtilisateur());
 			    	 date.setText(demande.getDateEmprunt().toString().substring(0, 11));
 			    	 description.setText(demande.getObjet().getDescription());
 			    	 duree.setText(demande.getDuree() + " jour(s)");
