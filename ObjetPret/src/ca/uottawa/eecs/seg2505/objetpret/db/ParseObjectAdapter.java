@@ -1,5 +1,6 @@
 package ca.uottawa.eecs.seg2505.objetpret.db;
 
+import ca.uottawa.eecs.seg2505.objetpret.Constantes;
 import ca.uottawa.eecs.seg2505.objetpret.model.Emprunt;
 import ca.uottawa.eecs.seg2505.objetpret.model.Objet;
 import ca.uottawa.eecs.seg2505.objetpret.model.Preteur;
@@ -63,6 +64,10 @@ public class ParseObjectAdapter {
 		o.put(empruntPreteur, emprunt.getPreteur().getNomUtilisateur());
 		o.put(empruntUtilisateur, emprunt.getUtilisateur().getNomUtilisateur());
 		o.put(empruntStatut, emprunt.getStatus().toString());
+		//si l'emprunt a deja un ID, il faut le sauvegarder sur parse
+		if(emprunt.getID()!=Constantes.VIDE){
+			o.setObjectId(emprunt.getID());
+		}
 		
 		o.put(empruntEstEvalueParEmprunteur, emprunt.estEvalueParEMPRUNTEUR());
 		o.put(empruntEstEvalueParPreteur, emprunt.estEvalueParPreteur());

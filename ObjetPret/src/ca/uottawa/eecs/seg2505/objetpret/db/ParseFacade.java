@@ -128,21 +128,21 @@ public class ParseFacade implements DBFacade {
 
 	@Override
 	public List<Emprunt> getDemandesDePret(Utilisateur utilisateur) {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Utilisateur");
-		query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
-		query.whereEqualTo("empruntStatut", "DEMANDE");
-		List<ParseObject> resultats;
-		List<Emprunt> emprunts = new ArrayList<Emprunt>();
 		try {
+			ParseQuery<ParseObject> query = ParseQuery.getQuery("Emprunt");
+			query.whereEqualTo("empruntPreteur", utilisateur.getNomUtilisateur());
+			query.whereEqualTo("empruntStatut", "DEMANDE");
+			List<ParseObject> resultats;
+			List<Emprunt> emprunts = new ArrayList<Emprunt>();
 			resultats = query.find();
 			for(ParseObject res: resultats){
 				emprunts.add(ParseObjectAdapter.toEmprunt(res));
 				return emprunts;
 			}
-		} catch (Exception e){
-		  		System.out.println(e);
+		}catch (Exception e){
+			Log.e(ParseObjectAdapter.erreurTag, "erreur de Parse (Parsefacade.sauvegarderEmprunt)");
 		}
-		return null;// TODO Auto-generated method stub
+		return new ArrayList<Emprunt>();// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -158,9 +158,15 @@ public class ParseFacade implements DBFacade {
 	
 	@Override
 	public void sauvegarderEmprunt(Emprunt emprunt){
-		ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
-		//TODO enregistrer sur parse
-		empruntParse.saveEventually();
+		try{
+			ParseObject empruntParse = ParseObjectAdapter.from(emprunt);
+			Log.d("ID de l'Objet", emprunt.getID()+" parse: "+empruntParse.getObjectId());
+			//enregistrer sur parse
+			empruntParse.save();
+		}catch(ParseException e){
+			Log.e(ParseObjectAdapter.erreurTag, "erreur de Parse (Parsefacade.sauvegarderEmprunt)");
+		}
+		
 	}
 	@Override
 	public List<Emprunt> getObjetsEmpruntes(Utilisateur utilisateur) {
